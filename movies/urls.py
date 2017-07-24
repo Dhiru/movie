@@ -17,13 +17,8 @@ from django.contrib import admin
 from rest_framework import routers
 from movieapp import views
 
-router = routers.DefaultRouter()
-router.register(r'movies', views.MovieViewSet)
-router.register(r'movie/(?P<movie>.+)/$', views.MovieList)
-
+user_list = views.MovieViewSet.as_view({'get': 'list'})
 urlpatterns = [
-    #url(r'^movie/(?P<movie>.+)/$', views.MovieList.as_view()),
-    url(r'^', include(router.urls)),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^movies', user_list),
     url(r'^admin/', include(admin.site.urls)),
 ]
